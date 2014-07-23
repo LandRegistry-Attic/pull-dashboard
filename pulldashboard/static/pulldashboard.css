@@ -1,0 +1,45 @@
+html {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  width: 100%;
+  background-color: #111;
+  color: white;
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+div .failing {
+  background:red; 
+  border-radius: 10px 10px 10px 10px;
+  padding: 5px 10px 10px 10px;
+}
+
+div .started {
+  background:orange; 
+  border-radius: 10px 10px 10px 10px;
+  padding: 5px 10px 10px 10px;
+}
+
+div .passing {
+  background:lightGreen; 
+  border-radius: 10px 10px 10px 10px;
+  padding: 5px 10px 10px 10px;
+}
+
+p { 
+  margin-bottom: 0;
+  margin-top: 0;
+}
