@@ -17,9 +17,3 @@ app.logger.info("\nConfiguration\n%s\n" % app.config)
 # if this app uses a db you'll need this
 # from flask.ext.sqlalchemy import SQLAlchemy
 # db = SQLAlchemy(app)
-
-# govuk_template asset path
-@app.context_processor
-def asset_path_context_processor():
-    return {'asset_path': '/static/govuk_template/'}
-
