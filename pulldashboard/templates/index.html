@@ -7,9 +7,37 @@
 <body>
   <div id="content">
     <div class="inner-block">
-      <h1>Pull request status</h1>
+      <h1>Outstanding pull requests</h1>
       <div class="text">
-      
+        {% for pl in pulls %}
+          <div class="passing">
+            <p>
+              <b>
+                {% if pl.days_old > 0 %}
+                {{pl.days_old}} {{ 'days' if pl.days_old > 1 else 'day' }}
+                {% endif %}
+
+                {% if pl.hours_old > 0 %}
+                {{pl.hours_old}} {{ 'hours' if pl.hours_old > 1 else 'hour' }}
+                {% endif %}
+
+                {% if pl.days_old == 0 and pl.hours_old == 0 %}
+                Less than an hour
+                {% endif %}
+
+                ago
+
+                 <br/>
+
+                 <span style="font-size:150%">{{ pl.repo_name }}</span> 
+
+                 <br/>
+
+                {{ pl.user }} - {{ pl.title }} (#{{ pl.number }})
+              </b>
+            </p>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>

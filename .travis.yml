@@ -1,0 +1,19 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -r requirements.txt
+- pip install -r requirements_test.txt
+script: py.test
+env:
+  - SETTINGS='config.TestConfig'
+deploy:
+  provider: heroku
+  buildpack: python
+  api_key:
+    secure: RALObCqI3sLOVfkwwBFoMTjoWFSrdKO0olBvNpySgIDjZhVDOXgPiUVhecvYsHRXrgR8aQksAohN4UMMPXr7pQAol56mCb9q59+zsSnU4n9oLHLWyw4Qm7/E6uhVzA7leoIA2olKifa0Rs2RWDETfExQeWdniMnx9Aohlw3MDHY=
+  strategy: git
+  app: lr-pull-dashboard
+  on:
+    repo: LandRegistry/pull-dashboard
+    branch: master

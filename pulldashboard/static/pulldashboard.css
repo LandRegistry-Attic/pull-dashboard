@@ -21,20 +21,8 @@ div {
   margin-right: 25px;
 }
 
-div .failing {
-  background:red; 
-  border-radius: 10px 10px 10px 10px;
-  padding: 5px 10px 10px 10px;
-}
-
-div .started {
-  background:orange; 
-  border-radius: 10px 10px 10px 10px;
-  padding: 5px 10px 10px 10px;
-}
-
 div .passing {
-  background:lightGreen; 
+  background:orchid; 
   border-radius: 10px 10px 10px 10px;
   padding: 5px 10px 10px 10px;
 }
