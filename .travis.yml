@@ -6,12 +6,12 @@ install:
 - pip install -r requirements_test.txt
 script: py.test
 env:
-  - SETTINGS='config.TestConfig'
+- SETTINGS='config.TestConfig' secure: lnf5D5Mcu8cxEkCW/lMpLQwMDHIZMKB3OgRyVpgiA+HrewsZanqs7sLkXPO+Yi2+uupwNFkWo3VlE3s7s7b2mF1E27ic0R1YmRBpM35sm4613Ba/ido6ty+Hez1HqTH7rtmGaBVIeQoihB8IEmDN+wJAcgMeO0f10f1P2M+Za0g=
 deploy:
   provider: heroku
   buildpack: python
   api_key:
-    secure: RALObCqI3sLOVfkwwBFoMTjoWFSrdKO0olBvNpySgIDjZhVDOXgPiUVhecvYsHRXrgR8aQksAohN4UMMPXr7pQAol56mCb9q59+zsSnU4n9oLHLWyw4Qm7/E6uhVzA7leoIA2olKifa0Rs2RWDETfExQeWdniMnx9Aohlw3MDHY=
+    secure: BcePwWl6TtHUNTRgbeD3qfVl16D1A/SkHEwokZ1DYS+VmFWCXoUcUPkl37iHQc02L91ZrvLfcD8uIDkGfwj6b8Pr0+snHMZNVc46p4A7we2MqjbqMH9Uj+1GNI0Hg/Yps8rLlpXmTkxE7czeawKZIV79xw+UT4V7pKEyL/VaGew=
   strategy: git
   app: lr-pull-dashboard
   on:
