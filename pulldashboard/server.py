@@ -23,11 +23,7 @@ def index():
 
             # Check if issue is actually a pull request
             if 'pull_request' in raw_issue:
-
-                print raw_issue
                 pr = PullRequest(raw_issue['number'], raw_issue['title'], raw_issue['user']['login'], timegm(time.strptime(raw_issue['created_at'].replace('Z', 'GMT'), '%Y-%m-%dT%H:%M:%S%Z')), raw_issue['repository']['name'])
-
-
                 pulls.append(pr)
 
     # Sort by time
