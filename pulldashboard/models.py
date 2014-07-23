@@ -1,4 +1,4 @@
-from appname import db
+from pulldashboard import db
 
 class Foo(db.Model):
 

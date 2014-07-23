@@ -1,8 +1,8 @@
 from flask import render_template
-from appname import app
+from pulldashboard import app
 
 # If using db, do something like this:
-# from appname import db
+# from pulldashboard import db
 # from  models import Foo
 
 
