@@ -7,7 +7,6 @@ install:
 script: py.test
 env:
   global:
-    - secure: lnf5D5Mcu8cxEkCW/lMpLQwMDHIZMKB3OgRyVpgiA+HrewsZanqs7sLkXPO+Yi2+uupwNFkWo3VlE3s7s7b2mF1E27ic0R1YmRBpM35sm4613Ba/ido6ty+Hez1HqTH7rtmGaBVIeQoihB8IEmDN+wJAcgMeO0f10f1P2M+Za0g=
     - SETTINGS=config.TestConfig
 deploy:
   provider: heroku
