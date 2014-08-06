@@ -43,7 +43,7 @@
               <div class="alert alert-info">
                 <i class="fa fa-spinner fa-4x pull-left"></i>
                 <h4><strong>{{ pl.repo_name }}</strong></h4>
-                <p>#{{ pl.number }} by {{ pl.user }} - {{ pl.title }}</p>
+                <p><a href="{{ pl.pull_url }}" target="_blank">#{{ pl.number }} by {{ pl.user }} - {{ pl.title }}</a></p>
 
                 <p>{% if pl.days_old > 0 %}
                 {{pl.days_old}} {{ 'days' if pl.days_old > 1 else 'day' }}

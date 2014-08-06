@@ -1,11 +1,12 @@
 from datetime import datetime
 class PullRequest(object):
-    def __init__(self, number, title, user, created_at, repo_name):
+    def __init__(self, number, title, user, created_at, repo_name, pull_url):
         self.number = number
         self.title = title
         self.user = user
         self.created_at = created_at
         self.repo_name = repo_name
+        self.pull_url = pull_url
 
 		# Determine how old the record is
         now = datetime.now()

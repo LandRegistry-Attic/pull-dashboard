@@ -28,7 +28,8 @@ def index():
                     raw_issue['title'], 
                     raw_issue['user']['login'], 
                     timegm(time.strptime(raw_issue['created_at'].replace('Z', 'GMT'), '%Y-%m-%dT%H:%M:%S%Z')), 
-                    raw_issue['repository']['name']
+                    raw_issue['repository']['name'],
+                    raw_issue['html_url']
                     )
                 pulls.append(pr)
 
