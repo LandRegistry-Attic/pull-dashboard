@@ -6,11 +6,12 @@ class Config(object):
     # split parameter out so URL config var can be used for response mocking
     GITHUB_API_ISSUES_FILTER = "?filter=all"
     GITHUB_API_HEADERS = {
-    'User-Agent': 'LandRegistry-Build-Dashboard/1.0.0', 
-    'Accept': 'application/vnd.github.v3+json', 
-    'Content-type': 'application/json', 
+    'User-Agent': 'LandRegistry-Build-Dashboard/1.0.0',
+    'Accept': 'application/vnd.github.v3+json',
+    'Content-type': 'application/json',
     'Authorization': 'token %s' % os.environ.get('GITHUB_API_KEY')
     }
+    JENKINS_URL = 'http://54.72.23.130/api/json?pretty=true&depth=2';
 
 class DevelopmentConfig(Config):
     DEBUG = True

@@ -18,3 +18,12 @@ class PullRequest(object):
 
     def getCleanCreatedAt(self):
         return datetime.fromtimestamp(self.created_at).strftime('%Y-%m-%d %H:%M:%S')
+
+class JenkinsProject(object):
+    def __init__(self, name, url, status, timestamp, culprits, buildid):
+        self.name = name
+        self.url = url
+        self.status = status
+        self.timestamp = timestamp
+        self.culprits = culprits
+        self.buildid = buildid

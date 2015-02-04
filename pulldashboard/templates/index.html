@@ -1,6 +1,6 @@
 <html>
 <head>
-<meta http-equiv="refresh" content="30">
+<meta http-equiv="refresh" content="120">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -10,35 +10,25 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <title>Pull request dashboard</title>
 </head>
-<body>
-<div class="container-fluid">
-  <nav class="navbar navbar-default" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Land Registry Dashboards</a>
-      </div>
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-default" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Land Registry Dashboard</a>
+          </div>
+      </nav>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="http://lr-build-dashboard.herokuapp.com/">Builds</a></li>
-          <li><a href="http://lr-test-dashboard.herokuapp.com/">Tests</a></li>
-          <li class="active"><a href="http://lr-pull-dashboard.herokuapp.com/">Pulls</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-  </nav>
-
-
-    <div class="page-header">
-     <h1>Outstanding pull requests</h1>
-    </div>
-
+      <div class="col-xs-6">
+        <div class="page-header">
+         <h1>Outstanding pull requests</h1>
+        </div>
         {% for pl in pulls %}
           <div class="row">
             <div class="col-md-12">
@@ -63,7 +53,42 @@
             </div>
           </div>
         {% endfor %}
-</div>
+      </div>
+      <div class="col-xs-6">
+        <div class="page-header">
+         <h1>Continuous Integration</h1>
+        </div>
+        {% for ci in ciprojects %}
+          <div class="row">
+            <div class="col-md-12">
 
-</body>
+              {% if ci.status == 'Passing' %}
+              <div class="alert alert-success">
+                <i class="fa fa-check-circle fa-4x pull-left"></i>
+              {% else %}
+              <div class="alert alert-danger">
+                <i class="fa fa-times-circle fa-4x pull-left"></i>
+              {% endif %}
+
+
+                <h4><strong>{{ ci.name }}</strong> <small>(#<a href="{{ ci.url }}" target="_blank">{{ ci.buildid }}</a>)</small></h4>
+                <p></p>
+                {% if ci.status == 'Passing' %}
+                <p>Culprits: None</p>
+                {% else %}
+                <p><b>Culprits:</b>
+                  {% for culprit in ci.culprits %}
+                    {{ culprit.fullName }}
+                  {% endfor %}
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+
+    </div>
+  </body>
 </html>
