@@ -41,16 +41,16 @@ def index():
         jenkins_raw = response.json()
         for jenkins_projects in jenkins_raw['jobs']:
             status = 'Failing';
-            if jenkins_projects['builds'][0]['result'] == 'SUCCESS':
+            if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
                 status = 'Passing';
 
             ciproject = JenkinsProject(
                 jenkins_projects['name'],
-                jenkins_projects['builds'][0]['url'],
+                jenkins_projects['lastBuild']['url'],
                 status,
-                jenkins_projects['builds'][0]['timestamp'],
-                jenkins_projects['builds'][0]['culprits'],
-                jenkins_projects['builds'][0]['number']
+                jenkins_projects['lastBuild']['timestamp'],
+                jenkins_projects['lastBuild']['culprits'],
+                jenkins_projects['lastBuild']['number']
                 )
             ciprojects.append(ciproject)
 
