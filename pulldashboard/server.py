@@ -76,9 +76,8 @@ def index():
 
         return render_template("index.html", pulls=pulls, ciprojects=ciprojects)
 
-    except:
-
-        return render_template("jenkins_error.html", jenkins_url=app.config['JENKINS_URL'])
+    except Exception as e:
+        return render_template("jenkins_error.html", jenkins_url=app.config['JENKINS_URL'], error=e)
 
 
 #  Some useful headers to set to beef up the robustness of the app
