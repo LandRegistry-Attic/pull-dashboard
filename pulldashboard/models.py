@@ -10,8 +10,8 @@ class PullRequest(object):
 
 		# Determine how old the record is
         now = datetime.now()
-    	then = datetime.fromtimestamp(self.created_at)
-    	tdelta = now - then
+        then = datetime.fromtimestamp(self.created_at)
+        tdelta = now - then
         self.days_old = tdelta.days;
         self.hours_old = tdelta.seconds // 3600;
 

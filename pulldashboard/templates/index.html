@@ -65,6 +65,9 @@
               {% if ci.status == 'Passing' %}
               <div class="alert alert-success">
                 <i class="fa fa-check-circle fa-4x pull-left"></i>
+              {% elif ci.status == 'Notrun' %}
+              <div class="alert alert-info">
+                <i class="fa fa-minus-circle fa-4x pull-left"></i>
               {% else %}
               <div class="alert alert-danger">
                 <i class="fa fa-times-circle fa-4x pull-left"></i>
@@ -74,6 +77,8 @@
                 <h4><strong>{{ ci.name }}</strong> <small>(#<a href="{{ ci.url }}" target="_blank">{{ ci.buildid }}</a>)</small></h4>
                 <p></p>
                 {% if ci.status == 'Passing' %}
+                <p>Culprits: None</p>
+                {% elif ci.status == 'Notrun' %}
                 <p>Culprits: None</p>
                 {% else %}
                 <p><b>Culprits:</b>

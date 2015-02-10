@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from flask import render_template
 from pulldashboard import app
-from models import PullRequest, JenkinsProject
+from pulldashboard.models import PullRequest, JenkinsProject
 from pulldashboard import excludedRepos
 import requests
 import time
@@ -35,30 +35,50 @@ def index():
                     raw_issue['html_url']
                     )
                 pulls.append(pr)
+    try:
 
-    response = requests.get(app.config['JENKINS_URL'])
-    if response.status_code == requests.codes.ok:
-        jenkins_raw = response.json()
-        for jenkins_projects in jenkins_raw['jobs']:
-            status = 'Failing';
-            if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
-                status = 'Passing';
+        response = requests.get(app.config['JENKINS_URL'])
+        if response.status_code == requests.codes.ok:
+            jenkins_raw = response.json()
+            for jenkins_projects in jenkins_raw['jobs']:
+                try:
+                    status = 'Failing'
+                    if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
+                        status = 'Passing'
+                        url = jenkins_projects['lastBuild']['url']
+                        timestamp = jenkins_projects['lastBuild']['timestamp']
+                        culprits = jenkins_projects['lastBuild']['culprits']
+                        number = jenkins_projects['lastBuild']['number']
 
-            ciproject = JenkinsProject(
-                jenkins_projects['name'],
-                jenkins_projects['lastBuild']['url'],
-                status,
-                jenkins_projects['lastBuild']['timestamp'],
-                jenkins_projects['lastBuild']['culprits'],
-                jenkins_projects['lastBuild']['number']
+                except:
+                    status = 'Notrun'
+                    url = ''
+                    timestamp = ''
+                    culprits = ''
+                    number = '0'
+
+                ciproject = JenkinsProject(
+                    jenkins_projects['name'],
+                    url,
+                    status,
+                    timestamp,
+                    culprits,
+                    number
                 )
-            ciprojects.append(ciproject)
+                ciprojects.append(ciproject)
 
-    # Sort by time, oldest first as that's the most important to sort out
-    pulls.sort(key=lambda x: x.created_at, reverse=False)
-    ciprojects.sort(key=lambda x: x.status, reverse=False)
 
-    return render_template("index.html", pulls=pulls, ciprojects=ciprojects)
+
+        # Sort by time, oldest first as that's the most important to sort out
+        pulls.sort(key=lambda x: x.created_at, reverse=False)
+        ciprojects.sort(key=lambda x: x.status, reverse=False)
+
+        return render_template("index.html", pulls=pulls, ciprojects=ciprojects)
+
+    except:
+
+        return render_template("jenkins_error.html", jenkins_url=app.config['JENKINS_URL'])
+
 
 #  Some useful headers to set to beef up the robustness of the app
 # https://www.owasp.org/index.php/List_of_useful_HTTP_headers
