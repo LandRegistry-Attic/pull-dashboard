@@ -45,10 +45,11 @@ def index():
                     status = 'Failing'
                     if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
                         status = 'Passing'
-                        url = jenkins_projects['lastBuild']['url']
-                        timestamp = jenkins_projects['lastBuild']['timestamp']
-                        culprits = jenkins_projects['lastBuild']['culprits']
-                        number = jenkins_projects['lastBuild']['number']
+
+                    url = jenkins_projects['lastBuild']['url']
+                    timestamp = jenkins_projects['lastBuild']['timestamp']
+                    culprits = jenkins_projects['lastBuild']['culprits']
+                    number = jenkins_projects['lastBuild']['number']
 
                 except:
                     status = 'Notrun'
