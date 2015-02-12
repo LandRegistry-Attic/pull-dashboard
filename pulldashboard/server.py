@@ -5,6 +5,7 @@ from pulldashboard.models import PullRequest, JenkinsProject
 from pulldashboard import excludedRepos
 import requests
 import time
+import re
 from calendar import timegm
 
 @app.route('/')
@@ -41,32 +42,36 @@ def index():
         if response.status_code == requests.codes.ok:
             jenkins_raw = response.json()
             for jenkins_projects in jenkins_raw['jobs']:
-                try:
-                    status = 'Failing'
-                    if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
-                        status = 'Passing'
 
-                    url = jenkins_projects['lastBuild']['url']
-                    timestamp = jenkins_projects['lastBuild']['timestamp']
-                    culprits = jenkins_projects['lastBuild']['culprits']
-                    number = jenkins_projects['lastBuild']['number']
+                result = re.findall(r'\(Controller\)', jenkins_projects['name'])
+                if (len(result) == 0):
 
-                except:
-                    status = 'Notrun'
-                    url = ''
-                    timestamp = ''
-                    culprits = ''
-                    number = '0'
+                    try:
+                        status = 'Failing'
+                        if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
+                            status = 'Passing'
 
-                ciproject = JenkinsProject(
-                    jenkins_projects['name'],
-                    url,
-                    status,
-                    timestamp,
-                    culprits,
-                    number
-                )
-                ciprojects.append(ciproject)
+                        url = jenkins_projects['lastBuild']['url']
+                        timestamp = jenkins_projects['lastBuild']['timestamp']
+                        culprits = jenkins_projects['lastBuild']['culprits']
+                        number = jenkins_projects['lastBuild']['number']
+
+                    except:
+                        status = 'Notrun'
+                        url = ''
+                        timestamp = ''
+                        culprits = ''
+                        number = '0'
+
+                    ciproject = JenkinsProject(
+                        jenkins_projects['name'],
+                        url,
+                        status,
+                        timestamp,
+                        culprits,
+                        number
+                    )
+                    ciprojects.append(ciproject)
 
 
 
