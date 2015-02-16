@@ -45,33 +45,33 @@ def index():
 
                 result = re.findall(r'\(Controller\)', jenkins_projects['name'])
                 if (len(result) == 0):
+                    if jenkins_projects['buildable'] == True:
+                        try:
+                            status = 'Failing'
+                            if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
+                                status = 'Passing'
 
-                    try:
-                        status = 'Failing'
-                        if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
-                            status = 'Passing'
+                            url = jenkins_projects['lastBuild']['url']
+                            timestamp = jenkins_projects['lastBuild']['timestamp']
+                            culprits = jenkins_projects['lastBuild']['culprits']
+                            number = jenkins_projects['lastBuild']['number']
 
-                        url = jenkins_projects['lastBuild']['url']
-                        timestamp = jenkins_projects['lastBuild']['timestamp']
-                        culprits = jenkins_projects['lastBuild']['culprits']
-                        number = jenkins_projects['lastBuild']['number']
+                        except:
+                            status = 'Notrun'
+                            url = ''
+                            timestamp = ''
+                            culprits = ''
+                            number = '0'
 
-                    except:
-                        status = 'Notrun'
-                        url = ''
-                        timestamp = ''
-                        culprits = ''
-                        number = '0'
-
-                    ciproject = JenkinsProject(
-                        jenkins_projects['name'],
-                        url,
-                        status,
-                        timestamp,
-                        culprits,
-                        number
-                    )
-                    ciprojects.append(ciproject)
+                        ciproject = JenkinsProject(
+                            jenkins_projects['name'],
+                            url,
+                            status,
+                            timestamp,
+                            culprits,
+                            number
+                        )
+                        ciprojects.append(ciproject)
 
 
 
