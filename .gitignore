@@ -11,3 +11,5 @@ pulldashboard/static/.webassets-cache
 dev/
 
 .sass-cache
+
+test.rb

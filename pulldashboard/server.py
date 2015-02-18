@@ -45,33 +45,36 @@ def index():
 
                 result = re.findall(r'\(Controller\)', jenkins_projects['name'])
                 if (len(result) == 0):
-                    if jenkins_projects['buildable'] == True:
-                        try:
-                            status = 'Failing'
-                            if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
-                                status = 'Passing'
+                    result = re.findall(r'\(Branch\)', jenkins_projects['name'])
+                    if (len(result) == 0):
 
-                            url = jenkins_projects['lastBuild']['url']
-                            timestamp = jenkins_projects['lastBuild']['timestamp']
-                            culprits = jenkins_projects['lastBuild']['culprits']
-                            number = jenkins_projects['lastBuild']['number']
+                        if jenkins_projects['buildable'] == True:
+                            try:
+                                status = 'Failing'
+                                if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
+                                    status = 'Passing'
 
-                        except:
-                            status = 'Notrun'
-                            url = ''
-                            timestamp = ''
-                            culprits = ''
-                            number = '0'
+                                url = jenkins_projects['lastBuild']['url']
+                                timestamp = jenkins_projects['lastBuild']['timestamp']
+                                culprits = jenkins_projects['lastBuild']['culprits']
+                                number = jenkins_projects['lastBuild']['number']
 
-                        ciproject = JenkinsProject(
-                            jenkins_projects['name'],
-                            url,
-                            status,
-                            timestamp,
-                            culprits,
-                            number
-                        )
-                        ciprojects.append(ciproject)
+                            except:
+                                status = 'Notrun'
+                                url = ''
+                                timestamp = ''
+                                culprits = ''
+                                number = '0'
+
+                            ciproject = JenkinsProject(
+                                jenkins_projects['name'],
+                                url,
+                                status,
+                                timestamp,
+                                culprits,
+                                number
+                            )
+                            ciprojects.append(ciproject)
 
 
 
