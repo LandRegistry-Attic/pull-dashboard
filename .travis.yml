@@ -7,13 +7,12 @@ install:
 script: py.test
 env:
   global:
-    - SETTINGS=config.TestConfig
+  - SETTINGS=config.TestConfig
 deploy:
   provider: heroku
   buildpack: python
   api_key:
-    secure: BcePwWl6TtHUNTRgbeD3qfVl16D1A/SkHEwokZ1DYS+VmFWCXoUcUPkl37iHQc02L91ZrvLfcD8uIDkGfwj6b8Pr0+snHMZNVc46p4A7we2MqjbqMH9Uj+1GNI0Hg/Yps8rLlpXmTkxE7czeawKZIV79xw+UT4V7pKEyL/VaGew=
-  strategy: git
+    secure: mEZYEhSMwSQg5om22y7IIuQPNR3T6gfhWOEVDOudsUlEbxp+KqTMcD8T97/X8VlfhtdvNJM6CtdC0qWmlz+qatM+nNO2cIBPrQ9r7MRaU1brfSKhcQ/w9v3urjCzOEuq0EwvHPwC9H/BzlHPNXrgjc+ey0aGCVecx7eV5RqWT+0=
   app: lr-pull-dashboard
   on:
     repo: LandRegistry/pull-dashboard
