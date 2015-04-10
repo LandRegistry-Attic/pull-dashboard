@@ -12,5 +12,5 @@ export GITHUB_API_KEY=<key>
 
 ## Configuration
 
-The list of repositories to exclude are in held in the file pointed to by the config.py::BLACKLIST_REPOSITORIES entry. Currently this is 'Blacklistfile'.
+The list of repositories to exclude are in held in the file pointed to by the config.py::REPOSITORY_BLACKLIST entry. Currently this is 'Blacklistfile'.
 
