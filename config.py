@@ -12,6 +12,8 @@ class Config(object):
     'Authorization': 'token %s' % os.environ.get('GITHUB_API_KEY')
     }
     JENKINS_URL = 'http://52.16.47.1:8080/api/json?pretty=true&depth=2&&tree=jobs[name,buildable,lastBuild[number,duration,timestamp,culprits[fullName],result,url,changeSet[items[msg,author[fullName]]]]]';
+    JENKINS_USER = os.environ.get('JENKINS_USER')
+    JENKINS_PASSWORD = os.environ.get('JENKINS_PASSWORD')
 
 class DevelopmentConfig(Config):
     DEBUG = True
