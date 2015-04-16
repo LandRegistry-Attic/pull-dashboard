@@ -38,7 +38,7 @@ def index():
                 pulls.append(pr)
     try:
 
-        response = requests.get(app.config['JENKINS_URL'])
+        response = requests.get(app.config['JENKINS_URL'], auth=(app.config['JENKINS_USER'], app.config['JENKINS_PASSWORD']))
         if response.status_code == requests.codes.ok:
             jenkins_raw = response.json()
             for jenkins_projects in jenkins_raw['jobs']:
