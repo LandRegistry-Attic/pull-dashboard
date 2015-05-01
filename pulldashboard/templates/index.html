@@ -65,6 +65,9 @@
               {% if ci.status == 'Passing' %}
               <div class="alert alert-success">
                 <i class="fa fa-check-circle fa-4x pull-left"></i>
+              {% elif ci.status == 'Inprogress' %}
+              <div class="alert alert-warning">
+                <i class="fa fa-minus-circle fa-4x pull-left"></i>
               {% elif ci.status == 'Notrun' %}
               <div class="alert alert-info">
                 <i class="fa fa-minus-circle fa-4x pull-left"></i>
