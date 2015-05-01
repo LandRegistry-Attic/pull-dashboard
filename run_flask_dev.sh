@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SETTINGS='config.DevelopmentConfig'
+export SETTINGS='dev'
 
 export PORT=8888
 

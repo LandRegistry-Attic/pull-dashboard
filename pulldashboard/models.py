@@ -1,3 +1,6 @@
+"""
+Data objects
+"""
 from datetime import datetime
 class PullRequest(object):
     def __init__(self, number, title, user, created_at, repo_name, pull_url):
@@ -12,12 +15,9 @@ class PullRequest(object):
         now = datetime.now()
         then = datetime.fromtimestamp(self.created_at)
         tdelta = now - then
-        self.days_old = tdelta.days;
-        self.hours_old = tdelta.seconds // 3600;
+        self.days_old = tdelta.days
+        self.hours_old = tdelta.seconds // 3600
 
-
-    def getCleanCreatedAt(self):
-        return datetime.fromtimestamp(self.created_at).strftime('%Y-%m-%d %H:%M:%S')
 
 class JenkinsProject(object):
     def __init__(self, name, url, status, timestamp, culprits, buildid):
