@@ -58,6 +58,8 @@ def index():
                         if jenkins_projects['buildable'] == True:
                             try:
                                 status = 'Failing'
+                                if jenkins_projects['lastBuild']['building'] == True:
+                                    status = 'Inprogress'
                                 if jenkins_projects['lastBuild']['result'] == 'SUCCESS':
                                     status = 'Passing'
 
